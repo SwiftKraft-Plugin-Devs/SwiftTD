@@ -20,7 +20,6 @@ namespace SwiftTD.Core
 
         public float Speed;
         public float Health;
-        public float Size;
         public float Value;
 
         public RoleTypeId Role;
@@ -51,8 +50,6 @@ namespace SwiftTD.Core
 
             return null;
         }
-
-        public override string ToString() => ID;
 
         public string GetFilePath() => FilePath;
 

@@ -1,8 +1,9 @@
 ﻿using CommandSystem;
-using PlayerRoles;
 using SwiftAPI.Commands;
 using SwiftNPCs.Core.Pathing;
 using SwiftTD.Core;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SwiftTD.Commands
 {
@@ -26,17 +27,44 @@ namespace SwiftTD.Commands
                 return false;
             }
 
-            Wave wave1 = JSONTools.GetSavedFromID<Wave>(Wave.FilePath, "WAVE1");
-            Wave wave2 = JSONTools.GetSavedFromID<Wave>(Wave.FilePath, "WAVE2");
-            Wave wave3 = JSONTools.GetSavedFromID<Wave>(Wave.FilePath, "WAVE3");
-            Wave wave4 = JSONTools.GetSavedFromID<Wave>(Wave.FilePath, "WAVE4");
-            Wave wave5 = JSONTools.GetSavedFromID<Wave>(Wave.FilePath, "WAVE5");
-            Wave wave6 = JSONTools.GetSavedFromID<Wave>(Wave.FilePath, "WAVE6");
-            Wave wave7 = JSONTools.GetSavedFromID<Wave>(Wave.FilePath, "WAVE7");
-            Wave wave8 = JSONTools.GetSavedFromID<Wave>(Wave.FilePath, "WAVE8");
-            Wave wave9 = JSONTools.GetSavedFromID<Wave>(Wave.FilePath, "WAVE9");
-            Wave wave10 = JSONTools.GetSavedFromID<Wave>(Wave.FilePath, "WAVE10");
-            Game game = new(wave1, wave2, wave3, wave4, wave5, wave6, wave7, wave8, wave9, wave10);
+            if (!TryGetArgument(args, 2, out string arg2) || !int.TryParse(arg2, out int hp))
+            {
+                result = "Please provide a life count! ";
+
+                return false;
+            }
+
+            if (!TryGetArgument(args, 3, out string arg3) || !int.TryParse(arg3, out int wait))
+            {
+                result = "Please provide a intermission time! ";
+
+                return false;
+            }
+
+            List<string> waves = [.. args];
+
+            waves.RemoveRange(0, 4);
+
+            List<Wave> ws = [];
+
+            foreach (string w in waves)
+            {
+                if (SavesManager.TryGetWave(w, out Wave wav))
+                    ws.Add(wav);
+            }
+
+            if (ws.Count <= 0)
+            {
+                result = "Please provide at least 1 valid wave! ";
+
+                return false;
+            }
+
+            Game game = new([.. ws])
+            {
+                Lives = hp,
+                Intermission = wait
+            };
 
             game.SpawnWaves(p);
 

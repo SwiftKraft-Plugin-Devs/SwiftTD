@@ -1,56 +1,37 @@
 ﻿using MEC;
 using SwiftTD.Interfaces;
-using System;
 using System.Collections.Generic;
 
 namespace SwiftTD.Core
 {
-    [Serializable]
-    public class Wave : ISaveAsJSON
+    public class Wave(string id, string displayName, params Wave.EnemySegment[] enemySegments) : ISaveAsJSON
     {
         public static readonly string FilePath = Plugin.PluginFolder + "\\Waves\\";
 
         internal delegate void OnFinish();
 
-        internal readonly List<EnemySegment> Enemies = [];
-
-        public SegmentList SegmentIDs = new();
+        public readonly List<EnemySegment> Enemies = [.. enemySegments];
 
         internal OnFinish FinishCallback;
 
-        public string ID;
-        public string DisplayName;
+        public string ID = id;
+        public string DisplayName = displayName;
 
-        public Wave(string id, string displayName, params string[] enemySegments)
+        public Wave(List<EnemySegment> enemies, string id, string displayName) : this(id, displayName, [.. enemies]) { }
+
+        public Wave(WaveWrapper wrapper) : this(wrapper.ID, wrapper.DisplayName, [])
         {
-            DisplayName = displayName;
-            ID = id;
-
-            SegmentIDs = new(enemySegments);
-
-            foreach (string i in SegmentIDs.SegmentIDs)
-            {
-                if (JSONTools.TryGetSavedFromID(EnemySegment.FilePath, i, out EnemySegment seg))
-                    Enemies.Add(seg);
-            }
+            foreach (EnemySegmentWrapper wrap in wrapper.Enemies)
+                Enemies.Add(new(wrap));
         }
 
-        public Wave(string id, string displayName, params EnemySegment[] enemySegments)
-        {
-            DisplayName = displayName;
-            ID = id;
+        public void AddSegment(EnemySegment seg) => Enemies.Add(seg);
 
-            foreach (EnemySegment i in enemySegments)
-            {
-                i.SaveAsJSON();
+        public void RemoveSegment(EnemySegment seg) => Enemies.Remove(seg);
 
-                if (JSONTools.TryGetSavedFromID(EnemySegment.FilePath, i.GetID(), out EnemySegment seg))
-                {
-                    SegmentIDs.Add(i.GetID());
-                    Enemies.Add(seg);
-                }
-            }
-        }
+        public void RemoveSegment(int seg) => Enemies.RemoveAt(seg);
+
+        public void ClearSegments() => Enemies.Clear();
 
         public void SpawnAll(SwiftNPCs.Core.Pathing.Path p, Game g)
         {
@@ -87,30 +68,33 @@ namespace SwiftTD.Core
 
         public string GetID() => ID;
 
-        [Serializable]
-        public class SegmentList : IJsonSerializable
+        public static Wave GetWaveFromID(string id) => new(JSONTools.GetSavedFromID<WaveWrapper>(FilePath, id));
+        public static bool TryGetWaveFromID(string id, out Wave output)
         {
-            public readonly List<string> SegmentIDs = [];
-
-            public SegmentList() { }
-
-            public SegmentList(params string[] ids)
-            {
-                SegmentIDs = [.. ids];
-            }
-
-            public void Add(string id) => SegmentIDs.Add(id);
+            output = GetWaveFromID(id);
+            return output != null;
         }
 
-        [Serializable]
-        public class EnemySegment : ISaveAsJSON
+        public class EnemySegmentWrapper : IJsonSerializable
         {
-            public static readonly string FilePath = Plugin.PluginFolder + "\\Segments\\";
+            public string EnemyID { get; set; }
 
+            public int Count { get; set; }
+
+            public float Delay { get; set; }
+        }
+
+        public class WaveWrapper : IJsonSerializable
+        {
+            public List<EnemySegmentWrapper> Enemies { get; set; }
+
+            public string ID { get; set; }
+            public string DisplayName { get; set; }
+        }
+
+        public class EnemySegment : IJsonSerializable
+        {
             internal delegate void OnFinish();
-
-            public string ID;
-            public string DisplayName;
 
             public string EnemyID;
 
@@ -124,7 +108,9 @@ namespace SwiftTD.Core
             private readonly bool CanSpawn = false;
             private readonly EnemyBase enemy;
 
-            public EnemySegment(string id, string displayName, EnemyBase enemy, int count, float delay) : this(id, displayName, enemy.ID, count, delay)
+            public EnemySegment(EnemySegmentWrapper wrapper) : this(wrapper.EnemyID, wrapper.Count, wrapper.Delay) { }
+
+            public EnemySegment(EnemyBase enemy, int count, float delay) : this(enemy.ID, count, delay)
             {
                 if (!CanSpawn)
                 {
@@ -134,11 +120,8 @@ namespace SwiftTD.Core
                 }
             }
 
-            public EnemySegment(string id, string displayName, string enemyId, int count, float delay)
+            public EnemySegment(string enemyId, int count, float delay)
             {
-                ID = id;
-                DisplayName = displayName;
-
                 EnemyID = enemyId;
                 Count = count;
                 Delay = delay;
@@ -177,10 +160,6 @@ namespace SwiftTD.Core
                 FinishCallback?.Invoke();
                 Spawning = false;
             }
-
-            public string GetFilePath() => FilePath;
-
-            public string GetID() => ID;
         }
     }
 }

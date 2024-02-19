@@ -36,11 +36,11 @@ namespace SwiftTD
 
             Log.Info("Enemy Files Path: " + EnemyBase.FilePath);
             Log.Info("Wave Files Path: " + Wave.FilePath);
-            Log.Info("Segment Files Path: " + Wave.EnemySegment.FilePath);
 
             Directory.CreateDirectory(EnemyBase.FilePath);
             Directory.CreateDirectory(Wave.FilePath);
-            Directory.CreateDirectory(Wave.EnemySegment.FilePath);
+
+            SavesManager.LoadSaves();
 
             CustomItemManager.RegisterItem("TOWER_PISTOL", new TowerCard() { DisplayName = "Pistol Tower", Role = RoleTypeId.Scientist, Weapon = ItemType.GunCOM18 });
             CustomItemManager.RegisterItem("TOWER_RIFLE", new TowerCard() { DisplayName = "Rifle Tower", Role = RoleTypeId.NtfSpecialist, Weapon = ItemType.GunE11SR });

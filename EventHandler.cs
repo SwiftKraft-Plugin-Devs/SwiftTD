@@ -25,5 +25,13 @@ namespace SwiftTD
                     p.SetBalance(p.GetBalance() + marker.Enemy.Value);
             }
         }
+
+        [PluginEvent(ServerEventType.CassieAnnouncesScpTermination)]
+        public bool CassieAnnouncesScpTermination(CassieAnnouncesScpTerminationEvent _event)
+        {
+            if (_event.Player.ReferenceHub.transform.TryGetComponent(out EnemyMarker _))
+                return false;
+            return true;
+        }
     }
 }
