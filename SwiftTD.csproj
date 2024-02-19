@@ -1,0 +1,111 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<LangVersion>12.0</LangVersion>
+		<TargetFramework>net4.8</TargetFramework>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="Northwood.PluginAPI" Version="13.1.2" />
+		<PackageReference Include="YamlDotNet" Version="13.7.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="Assembly-CSharp-firstpass">
+			<HintPath>$(SCPSLREFERENCES)\Assembly-CSharp-firstpass.dll</HintPath>
+		</Reference>
+		<Reference Include="Assembly-CSharp">
+			<HintPath>$(SCPSLREFERENCES)\Assembly-CSharp-Publicized.dll</HintPath>
+		</Reference>
+		<Reference Include="CommandSystem.Core">
+			<HintPath>$(SCPSLREFERENCES)\CommandSystem.Core.dll</HintPath>
+		</Reference>
+		<Reference Include="DeathLog">
+			<HintPath>$(SCPSLREFERENCES)\DeathLog.dll</HintPath>
+		</Reference>
+		<Reference Include="Mirror">
+			<HintPath>$(SCPSLREFERENCES)\Mirror-Publicized.dll</HintPath>
+		</Reference>
+		<Reference Include="Mirror.Components">
+			<HintPath>$(SCPSLREFERENCES)\Mirror.Components.dll</HintPath>
+		</Reference>
+		<Reference Include="NorthwoodLib">
+			<HintPath>$(SCPSLREFERENCES)\NorthwoodLib.dll</HintPath>
+		</Reference>
+		<Reference Include="PluginAPI">
+			<HintPath>$(SCPSLREFERENCES)\PluginAPI.dll</HintPath>
+		</Reference>
+		<Reference Include="Pooling">
+			<HintPath>$(SCPSLREFERENCES)\Pooling.dll</HintPath>
+		</Reference>
+		<Reference Include="SwiftAPI">
+			<HintPath>$(SCPSLREFERENCES)\SwiftAPI.dll</HintPath>
+		</Reference>
+		<Reference Include="SwiftNPCs">
+			<HintPath>$(SCPSLREFERENCES)\SwiftNPCs.dll</HintPath>
+		</Reference>
+		<Reference Include="SwiftShops">
+		  <HintPath>..\..\..\..\..\..\..\SCP_DLLS\SwiftShops.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.Mathematics">
+			<HintPath>$(SCPSLREFERENCES)\Unity.Mathematics.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.ProBuilder">
+			<HintPath>$(SCPSLREFERENCES)\Unity.ProBuilder.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.ProBuilder.Csg">
+			<HintPath>$(SCPSLREFERENCES)\Unity.ProBuilder.Csg.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.ProBuilder.KdTree">
+			<HintPath>$(SCPSLREFERENCES)\Unity.ProBuilder.KdTree.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.ProBuilder.Poly2Tri">
+			<HintPath>$(SCPSLREFERENCES)\Unity.ProBuilder.Poly2Tri.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.ProBuilder.Stl">
+			<HintPath>$(SCPSLREFERENCES)\Unity.ProBuilder.Stl.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.RenderPipelines.Core.Runtime">
+			<HintPath>$(SCPSLREFERENCES)\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
+			<HintPath>$(SCPSLREFERENCES)\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.RenderPipelines.HighDefinition.Config.Runtime">
+			<HintPath>$(SCPSLREFERENCES)\Unity.RenderPipelines.HighDefinition.Config.Runtime.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.RenderPipelines.HighDefinition.Runtime">
+			<HintPath>$(SCPSLREFERENCES)\Unity.RenderPipelines.HighDefinition.Runtime.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
+			<HintPath>$(SCPSLREFERENCES)\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.TextMeshPro">
+			<HintPath>$(SCPSLREFERENCES)\Unity.TextMeshPro.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.Timeline">
+			<HintPath>$(SCPSLREFERENCES)\Unity.Timeline.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.VisualEffectGraph.Runtime">
+			<HintPath>$(SCPSLREFERENCES)\Unity.VisualEffectGraph.Runtime.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine">
+			<HintPath>$(SCPSLREFERENCES)\UnityEngine.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.CoreModule">
+			<HintPath>$(SCPSLREFERENCES)\UnityEngine.CoreModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.PhysicsModule">
+			<HintPath>$(SCPSLREFERENCES)\UnityEngine.PhysicsModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UI">
+			<HintPath>$(SCPSLREFERENCES)\UnityEngine.UI.dll</HintPath>
+		</Reference>
+		<Reference Include="YamlDotNet">
+			<HintPath>$(SCPSLREFERENCES)\YamlDotNet.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+</Project>
