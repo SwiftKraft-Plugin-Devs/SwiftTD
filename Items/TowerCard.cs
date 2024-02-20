@@ -3,18 +3,17 @@ using InventorySystem.Items;
 using PlayerRoles;
 using PluginAPI.Core;
 using SwiftAPI.API.CustomItems;
-using SwiftTD.NPCs;
+using SwiftTD.Core;
 
 namespace SwiftTD.Items
 {
     public class TowerCard : CustomItemBase
     {
-        public ItemType Weapon;
-        public RoleTypeId Role;
+        public TowerBase Tower;
 
         public override bool Drop(Player _player, ItemBase _item)
         {
-            TowerSpawner.SpawnTower(Weapon, Role, _player.Position);
+            Tower.Spawn(_player.Position);
 
             _player.ReferenceHub.inventory.ServerRemoveItem(_item.ItemSerial, _item.PickupDropModel);
 
