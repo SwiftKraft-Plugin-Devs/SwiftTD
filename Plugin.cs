@@ -16,7 +16,7 @@ namespace SwiftTD
     {
         public static Plugin Instance;
 
-        public static readonly string PluginFolder = Paths.LocalPlugins.Plugins + "\\" + Name;
+        public static readonly string PluginFolder = Path.Combine(Paths.LocalPlugins.Plugins, Name);
 
         public const string Author = "SwiftKraft";
 
