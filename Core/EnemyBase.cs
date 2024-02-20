@@ -4,6 +4,7 @@ using SwiftNPCs.Core.Management;
 using SwiftNPCs.Core.World.AIModules;
 using SwiftTD.Interfaces;
 using System;
+using System.IO;
 using UnityEngine;
 
 namespace SwiftTD.Core
@@ -11,7 +12,7 @@ namespace SwiftTD.Core
     [Serializable]
     public class EnemyBase(string id, string displayName) : ISaveAsJSON
     {
-        public static readonly string FilePath = Plugin.PluginFolder + "\\Enemies\\";
+        public static readonly string FilePath = Path.Combine(Plugin.PluginFolder, "Enemies");
 
         public string ID = id;
         public string DisplayName = displayName;

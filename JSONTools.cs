@@ -8,7 +8,7 @@ namespace SwiftTD
     {
         public static void SaveAsJSON<T>(this T obj) where T : ISaveAsJSON
         {
-            File.WriteAllBytes(obj.GetFilePath() + obj.GetID() + ".json", JSONSerialize(obj));
+            File.WriteAllBytes(Path.Combine(obj.GetFilePath(), obj.GetID() + ".json"), JSONSerialize(obj));
         }
 
         public static byte[] JSONSerialize<T>(this T obj) where T : IJsonSerializable
@@ -29,7 +29,7 @@ namespace SwiftTD
 
         public static T GetSavedFromID<T>(string path, string id) where T : IJsonSerializable
         {
-            return JSONConvert<T>(path + id + ".json");
+            return JSONConvert<T>(Path.Combine(path, id + ".json"));
         }
 
         public static bool TryGetSavedFromID<T>(string path, string id, out T output) where T : IJsonSerializable

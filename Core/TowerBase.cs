@@ -5,13 +5,14 @@ using SwiftNPCs;
 using SwiftNPCs.Core.Management;
 using SwiftNPCs.Core.World.AIModules;
 using SwiftTD.Interfaces;
+using System.IO;
 using UnityEngine;
 
 namespace SwiftTD.Core
 {
     public class TowerBase(string id, string displayName, RoleTypeId role, ItemType weapon, float price, float range, float turnSpeed, bool headshot) : ISaveAsJSON
     {
-        public static readonly string FilePath = Plugin.PluginFolder + "\\Towers\\";
+        public static readonly string FilePath = Path.Combine(Plugin.PluginFolder, "Towers");
 
         public string ID = id;
         public string DisplayName = displayName;

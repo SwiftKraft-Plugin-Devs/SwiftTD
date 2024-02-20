@@ -1,12 +1,13 @@
 ﻿using MEC;
 using SwiftTD.Interfaces;
 using System.Collections.Generic;
+using System.IO;
 
 namespace SwiftTD.Core
 {
     public class Wave(string id, string displayName, params Wave.EnemySegment[] enemySegments) : ISaveAsJSON
     {
-        public static readonly string FilePath = Plugin.PluginFolder + "\\Waves\\";
+        public static readonly string FilePath = Path.Combine(Plugin.PluginFolder, "Waves");
 
         internal delegate void OnFinish();
 

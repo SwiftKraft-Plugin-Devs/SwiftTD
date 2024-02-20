@@ -1,13 +1,9 @@
-﻿using PlayerRoles;
-using PluginAPI.Core;
+﻿using PluginAPI.Core;
 using PluginAPI.Core.Attributes;
 using PluginAPI.Enums;
 using PluginAPI.Events;
 using PluginAPI.Helpers;
-using SwiftAPI.API.CustomItems;
-using SwiftShops.API;
 using SwiftTD.Core;
-using SwiftTD.Items;
 using System.IO;
 
 namespace SwiftTD
