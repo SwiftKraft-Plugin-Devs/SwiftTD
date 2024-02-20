@@ -31,6 +31,7 @@ namespace SwiftTD.Core
                 AIPlayerProfile prof = Utilities.CreatePathAI(Role, waypoint, p);
                 prof.WorldPlayer.MovementEngine.SpeedOverride = Speed;
                 prof.Player.Health = Health;
+                prof.DisplayNickname = DisplayName;
                 EnemyMarker m = prof.ReferenceHub.gameObject.AddComponent<EnemyMarker>();
 
                 if (prof.WorldPlayer.ModuleRunner.TryGetModule(out AIFollowPath fp))
