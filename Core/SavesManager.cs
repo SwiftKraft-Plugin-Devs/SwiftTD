@@ -12,6 +12,7 @@ namespace SwiftTD.Core
         public static readonly Dictionary<string, EnemyBase> RegisteredEnemies = [];
         public static readonly Dictionary<string, TowerBase> RegisteredTowers = [];
         public static readonly Dictionary<string, Wave> RegisteredWaves = [];
+        public static readonly Dictionary<string, GameTemplate> RegisteredGameTemplates = [];
 
         public static ShopProfile Shop = new();
 
@@ -35,6 +36,12 @@ namespace SwiftTD.Core
                     RegisterWave(wave);
             }
 
+            foreach (string file in Directory.EnumerateFiles(GameTemplate.FilePath, "*.json"))
+            {
+                if (JSONTools.TryJSONConvert(file, out GameTemplate gameTemplate))
+                    RegisterGameTemplate(gameTemplate);
+            }
+
             Shop.ID = "TOWERDEFENSE";
             Shop.DisplayName = "Tower Defense Shop";
 
@@ -54,6 +61,19 @@ namespace SwiftTD.Core
         {
             tower = GetTower(id);
             return tower != null;
+        }
+
+        public static GameTemplate GetGameTemplate(string id)
+        {
+            if (RegisteredGameTemplates.ContainsKey(id))
+                return RegisteredGameTemplates[id];
+            return null;
+        }
+
+        public static bool TryGetGameTemplate(string id, out GameTemplate gameTemplate)
+        {
+            gameTemplate = GetGameTemplate(id);
+            return gameTemplate != null;
         }
 
         public static EnemyBase GetEnemy(string id)
@@ -98,6 +118,8 @@ namespace SwiftTD.Core
         public static void RegisterEnemy(this EnemyBase enemy) { if (!RegisteredEnemies.ContainsKey(enemy.GetID())) RegisteredEnemies.Add(enemy.GetID(), enemy); else RegisteredEnemies[enemy.GetID()] = enemy; }
 
         public static void RegisterWave(this Wave wave) { if (!RegisteredWaves.ContainsKey(wave.GetID())) RegisteredWaves.Add(wave.GetID(), wave); else RegisteredWaves[wave.GetID()] = wave; }
+        
+        public static void RegisterGameTemplate(this GameTemplate gameTemplate) { if (!RegisteredGameTemplates.ContainsKey(gameTemplate.GetID())) RegisteredGameTemplates.Add(gameTemplate.GetID(), gameTemplate); else RegisteredGameTemplates[gameTemplate.GetID()] = gameTemplate; }
 
         public static void SaveTower(this TowerBase tower)
         {
@@ -118,6 +140,13 @@ namespace SwiftTD.Core
             RegisterWave(wave);
 
             wave.SaveAsJSON();
+        }
+
+        public static void SaveGameTemplate(this GameTemplate gameTemplate)
+        {
+            RegisterGameTemplate(gameTemplate);
+
+            gameTemplate.SaveAsJSON();
         }
     }
 }
