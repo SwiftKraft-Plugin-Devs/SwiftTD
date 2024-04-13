@@ -1,4 +1,5 @@
-﻿using PluginAPI.Core;
+﻿using PlayerRoles;
+using PluginAPI.Core;
 using SwiftAPI.API.CustomItems;
 using SwiftShops.API;
 using SwiftTD.Items;
@@ -35,12 +36,12 @@ namespace SwiftTD.Core
                 if (JSONTools.TryJSONConvert(file, out Wave wave))
                     RegisterWave(wave);
             }
-
+/*
             foreach (string file in Directory.EnumerateFiles(GameTemplate.FilePath, "*.json"))
             {
                 if (JSONTools.TryJSONConvert(file, out GameTemplate gameTemplate))
                     RegisterGameTemplate(gameTemplate);
-            }
+            }*/
 
             Shop.ID = "TOWERDEFENSE";
             Shop.DisplayName = "Tower Defense Shop";

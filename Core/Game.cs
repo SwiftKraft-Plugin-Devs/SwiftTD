@@ -1,5 +1,6 @@
 ﻿using MEC;
 using PluginAPI.Core;
+using SwiftAPI.API.ServerVariables;
 using SwiftNPCs.Core.Pathing;
 using System.Collections.Generic;
 
@@ -55,6 +56,8 @@ namespace SwiftTD.Core
 
         public void SpawnWaves(Path p)
         {
+            ServerVariableManager.SetVar("npckos", bool.TrueString);
+
             Timing.RunCoroutine(Spawn(p));
         }
 
