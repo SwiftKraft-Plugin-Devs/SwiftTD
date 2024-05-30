@@ -47,7 +47,7 @@
 			<HintPath>$(SCPSLREFERENCES)\SwiftNPCs.dll</HintPath>
 		</Reference>
 		<Reference Include="SwiftShops">
-		  <HintPath>..\..\..\..\..\..\..\SCP_DLLS\SwiftShops.dll</HintPath>
+		  <HintPath>$(SCPSLREFERENCES)\SwiftShops.dll</HintPath>
 		</Reference>
 		<Reference Include="Unity.Mathematics">
 			<HintPath>$(SCPSLREFERENCES)\Unity.Mathematics.dll</HintPath>
